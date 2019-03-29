@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Definition for fields used in the logger message processor",
+  "type": "object",
+  "properties": {
+    "priority": {
+      "type": "string",
+      "javaType": "org.mule.extension.jsonlogger.api.pojos.Priority",
+      "enum": [
+        "DEBUG",
+        "TRACE",
+        "INFO",
+        "WARN",
+        "ERROR"
+      ],
+      "sdk": {
+        "default": "INFO",
+        "summary": "Logger priority"
+      }
+    },
+    "tracePoint": {
+      "type": "string",
+      "javaType": "org.mule.extension.jsonlogger.api.pojos.TracePoint",
+      "enum": [
+        "START",
+        "BEFORE_TRANSFORM",
+        "AFTER_TRANSFORM",
+        "BEFORE_REQUEST",
+        "AFTER_REQUEST",
+        "FLOW",
+        "END",
+        "EXCEPTION"
+      ],
+      "sdk": {
+        "default": "START",
+        "summary": "Current processing stage"
+      }
+    },
+    "message": {
+      "type": "string",
+      "sdk": {
+        "example": "Add a log entry",
+        "required": true,
+        "summary": "Message to be logged"
+      }
+    },
+    "content": {
+      "type": "string",
+      "javaType": "org.mule.runtime.extension.api.runtime.parameter.ParameterResolver<org.mule.runtime.api.metadata.TypedValue<Object>>",
+      "sdk": {
+        "default": "#[output application/json indent=false ---\n{\n \tpayload: payload,\n \tattributes: attributes\n}]",
+        "summary": "Remove if no content should be logged",
+        "isContent": true
+      }
+    },
+    "exceptionDetail": {
+      "type": "object",
+      "javaType": "org.mule.extension.jsonlogger.api.pojos.ExceptionDetail",
+      "properties": {
+        "description": {
+          "type": "string",
+          "sdk": {
+            "default": "#[error.description default \"\"]",
+            "summary": "exception description details",
+            "expressionSupport": "SUPPORTED",
+            "required": true
+          }
+        },
+        "type": {
+          "type": "string",
+          "sdk": {
+            "default": "#[error.errorType.namespace default \"\" ++ \":\" ++ error.errorType.identifier default \"\"]",
+            "summary": "error type",
+            "expressionSupport": "SUPPORTED",
+            "required": false
+          }
+        },
+        "message": {
+          "type": "string",
+          "sdk": {
+            "default": "#[error.detailedDescription default \"\"]",
+            "summary": "error message",
+            "expressionSupport": "SUPPORTED",
+            "required": false
+          }
+        },
+        "errorCode": {
+          "type": "string",
+          "sdk": {
+            "summary": "unique error code",
+            "expressionSupport": "SUPPORTED",
+            "required": false
+          }
+        }
+      },
+      "sdk": {
+        "expressionSupport": "NOT_SUPPORTED",
+        "displayName" : "Exception Configuration",
+        "required" : false,
+        "parameterDsl" : {
+          "allowReferences" : false
+        }
+      }
+    },
+    "correlationId": {
+      "type": "string",
+      "sdk": {
+        "default": "#[correlationId]",
+        "placement": {
+          "tab": "Advanced"
+        }
+      }
+    },
+    "httpStatusCode": {
+      "type": "string",
+      "sdk": {
+        "default": "#[if(vars.httpStatusCode !=null) vars.httpStatusCode else attributes.httpStatusCode default \"\"]",
+        "required": false
+      }
+    }
+
+  }
+}
