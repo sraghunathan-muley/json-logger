@@ -15,6 +15,9 @@ For these reasons and based on previous customer experiences, I created this gen
 
 In a nutshell, by defining the output JSON schema as well as providing some additional DevKit specific details (e.g. default values, default expressions, etc.), we can dynamically generate a module that aligns to that schema.
 
+## New Mule4 Exception
+![](Jsonlogger-exception.png)
+
 ## Installation
 
 Please check this blogpost for more details: https://blogs.mulesoft.com/dev/anypoint-platform-dev/json-logging-in-mule-4-getting-the-most-out-of-your-logs/
@@ -22,3 +25,7 @@ Please check this blogpost for more details: https://blogs.mulesoft.com/dev/anyp
 ## Author
 
 * **Andres Ramirez** [Slack: @andres.ramirez / Email: andres.ramirez@mulesoft.com]
+
+## Contributer
+
+**Srinivasan Raghunathan**
