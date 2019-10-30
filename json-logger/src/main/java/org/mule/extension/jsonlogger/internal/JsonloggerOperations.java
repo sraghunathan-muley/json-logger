@@ -22,6 +22,8 @@ import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.transformation.TransformationService;
 import org.mule.runtime.core.api.el.ExpressionManager;
 import org.mule.runtime.extension.api.annotation.Expression;
+import org.mule.runtime.extension.api.annotation.execution.Execution;
+import org.mule.runtime.api.meta.model.operation.ExecutionType;
 import org.mule.runtime.extension.api.annotation.param.*;
 import org.mule.runtime.extension.api.runtime.operation.Result;
 import org.mule.runtime.extension.api.runtime.parameter.CorrelationInfo;
@@ -60,6 +62,7 @@ public class JsonloggerOperations implements Initialisable {
     /**
      * Log a new entry
      */
+    @Execution(ExecutionType.BLOCKING)
     public void logger(@ParameterGroup(name = "Logger") @Expression(value = NOT_SUPPORTED) LoggerProcessor loggerProcessor,
                        CorrelationInfo correlationInfo,
                        ComponentLocation location,
